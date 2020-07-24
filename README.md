@@ -1,40 +1,27 @@
 # android_device_realme_RMX1901
-For building TWRP for Realme X
+For building Orangefox for Realme X
 
-TWRP device tree for Realme X
+Orangefox device tree for Realme X
 
 ## Features
 
 Works:
 
-- ADB
-- Decryption of /data (Only if pattern or pin or password is not setted)
-- Screen brightness settings
-- Correct screenshot color
-- MTP
-- Flashing (opengapps, roms, images and so on)
-- Backup/Restore (Needs more testing)
-- USB OTG
-- Touchscreen
-
-
-TO-DO:
-
-- Vibration support
+- Everything
 
 ## Compile
 
-First checkout minimal twrp with omnirom tree:
+First checkout manifest :
 
 ```
-repo init -u git://github.com/minimal-manifest-twrp/platform_manifest_twrp_omni.git -b twrp-9.0
+repo init --depth=1 -u https://gitlab.com/OrangeFox/Manifest.git -b fox_9.0
 repo sync
 ```
 
 Then add these projects to .repo/manifest.xml:
 
 ```xml
-<project path="device/realme/RMX1901" name="mauronofrio/android_device_realme_RMX1901" remote="github" revision="android-9.0" />
+<project path="device/realme/RMX1901" name="device/RMX1901" remote="gitlab" revision="master" />
 ```
 
 Finally execute these:
@@ -42,14 +29,21 @@ Finally execute these:
 ```
 . build/envsetup.sh
 lunch omni_RMX1901-eng
-mka recoveryimage ALLOW_MISSING_DEPENDENCIES=true # Only if you use minimal twrp tree.
+mka recoveryimage ALLOW_MISSING_DEPENDENCIES=true
 ```
 
 To test it:
 
 ```
-fastboot boot out/target/product/RMX1901/recovery.img
+fastboot flash /path/to/recovery.img
+and then
+Flash the zip through the recovery for addon support.
 ```
+
+
+## Thanks
+
+- Thanks to @mauronfrio for the TWRP tree for realme X
 
 ## Other Sources
 
